@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    color:white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    display:flex;
+    width:100vw;
+    height:100vh;
+}
