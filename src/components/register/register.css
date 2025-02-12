@@ -1,0 +1,104 @@
+/* General styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Container styling */
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #121212; /* Dark background */
+}
+
+/* Login/Register Box */
+.login {
+    width: 350px;
+    padding: 30px;
+    background: #1e1e1e; /* Slightly lighter dark background */
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); /* Blue glow effect */
+    text-align: center;
+    position: relative;
+}
+
+/* Switcher Buttons */
+.switcher {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.switcher button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    padding-bottom: 5px;
+}
+
+.switcher button.active {
+    border-bottom: 2px solid #007bff; /* Active button underline */
+}
+
+/* Title */
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+    margin-top: 40px; /* Space below switcher */
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: #2a2a2a;
+    color: #ffffff;
+    font-size: 16px;
+    outline: none;
+}
+
+input::placeholder {
+    color: #aaaaaa;
+}
+
+/* Button styling */
+button[type="submit"]{
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    background: #007bff;
+    color: #ffffff;
+}
+.create-btn:disabled{
+    cursor:not-allowed;
+}
+button[type="submit"]:hover {
+    background: #0056b3;
+}
