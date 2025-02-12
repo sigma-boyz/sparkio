@@ -1,0 +1,129 @@
+
+.friends-container {
+    width: calc(100% - 60px);
+    height: 100vh;
+    background: #121212;
+    margin-left: 60px;
+    display: flex;
+    margin: 100px;
+    margin-top: 130px;
+    flex-direction: column;
+    color: white;
+  }
+  
+  /* Tabs Navigation */
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    background: #1e1e1e;
+    padding: 15px;
+    border-radius: 20px;
+    border-bottom: 1.4px solid #007bff;
+  }
+  
+  .tabs button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .tabs button.active {
+    border-bottom: 3px solid #007bff;
+  }
+  
+  /* Content Areas */
+  .friends-list, .add-friends, .friend-requests {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  
+  /* Search Bar */
+  .search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .search-bar input {
+    flex: 1;
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
+    background: #1e1e1e;
+    color: white;
+  }
+  
+  .search-bar button {
+    padding: 0px 12px;
+    background: #007bff;
+    height:45px;
+    border: none;
+    margin-top:10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* User Items */
+  .user-item {
+    display: flex;
+    align-items: center;
+    background: #1e1e1e;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .user-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .user-item span {
+    font-size: 16px;
+  }
+  
+  .user-item button {
+    margin-left: auto;
+    background: #007bff;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+.request-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.request-buttons .accept {
+  background: #28a745;
+  padding: 8px 12px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.request-buttons .reject {
+  background: #dc3545;
+  padding: 8px 12px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width:500px){
+  .friends-container{
+    margin: 0;
+  }
+}
