@@ -1,0 +1,103 @@
+.chatList{
+    flex:1;
+    overflow-y: scroll;
+    background:rgba(0, 0, 0, 0.23);
+    min-height: 650px;
+    .search{
+        position: sticky;
+        flex:1;
+        height:45px;
+        background-color: #1a1d23;
+        display:flex;
+        gap:10px;
+        margin:10px;
+        margin-bottom: 25px;
+        border-radius: 20px;
+        border-bottom: 1px solid rgba(2, 2, 2, 0.78);
+        
+        .searchBar{
+            flex:1;
+            align-items: center;
+            display: flex;
+            border-radius: 10px;
+        }
+
+        input{
+            background-color: transparent;
+            border:none;
+            font-size:16px;
+            outline: none;
+            color:white;
+            flex:1;
+        }
+    
+    }
+}
+.item{
+    display:flex;
+    align-items:center; 
+    cursor:pointer;
+    padding: 10px;
+    background-color: #1a1d23;
+    margin: 20px;
+    border-radius:20px;
+}
+.item:active{
+    background-color: #177ddc;
+}
+img{
+    height:50px;
+    margin-right:10px;
+    object-fit:cover;
+    width: 50px;
+    border-radius: 50%;
+}
+.texts{
+    display:flex;
+    flex:1;
+    flex-direction:column;
+    min-width: 0;
+
+    .name{
+        font-weight: 500;
+    }
+    .lastmsg{
+        font-size: 14px;
+        white-space: nowrap;  
+        overflow: hidden;    
+        text-overflow: ellipsis; 
+        max-width: 200px;   
+        display: block;      
+
+    }
+}
+.unseen-badge {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: #007bff; 
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  .item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .item:hover {
+    background: #2a2d35;
+  }
