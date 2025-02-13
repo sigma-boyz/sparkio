@@ -99,14 +99,15 @@ const Chat = () => {
       deletedFrom : arrayUnion(auth.currentUser.uid)
     })
     try{
-    const data = await getDoc(db,"chats",currentChatUID,"messages",id)
-    if(data.deletedFrom.length() === 2){
+    const data = await getDoc(doc(db,"chats",currentChatUID,"messages",id))
+    if(data.data().deletedFrom.length === 2){
       await deleteDoc(doc(db,"chats",currentChatUID,"messages",id))
+      console.log("both deleted")
     }
   }catch(err){
     console.log("err",err)
   }
-    updateLastMsg()
+  setTimeout(updateLastMsg, 200);
   }
   const DeleteFromEveryone = async(id)=>{
     await deleteDoc(doc(db,"chats",currentChatUID,"messages",id))
@@ -122,7 +123,7 @@ const Chat = () => {
     const [uid1, uid2] = currentChatUID.split("_");
     for(const msg of messages){
       if(updated === 2)break
-      if(!(msg.deletedFrom.includes(uid1))){
+      if(!(msg.deletedFrom.includes(uid1)) && updated === 0){
         let lastmsg
         if(msg.imageURL){
           lastmsg = "📷 Image"
@@ -138,7 +139,7 @@ const Chat = () => {
         })
         updated ++
       }
-      if(!(msg.deletedFrom.includes(uid2))){
+      if(!(msg.deletedFrom.includes(uid2)) && updated === 1){
         let lastmsg
         if(msg.imageURL){
           lastmsg = "📷 Image"
@@ -353,7 +354,7 @@ const Chat = () => {
                       a.download = msg.fileName;
                       a.click();
                     });
-                  }}/>:<OrbitProgress variant="track-disc" color="#5183fe" size="small" text="" textColor="" className="loader" />
+                  }}/>:<div className='file-loader'><OrbitProgress variant="track-disc" color="#5183fe" size="small" text="" textColor="" className="loader" /></div>
                 )}
                 </div>
               )}
