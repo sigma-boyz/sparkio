@@ -22,13 +22,11 @@ export const GlobalStateProvider = ({ children }) => {
   useEffect(() => {
     if (!auth.currentUser) return;
 
-    console.log("Setting up chat listeners...");
 
     const chatsRef = collection(db, "chats");
     const chatsQuery = query(chatsRef, where("users", "array-contains", auth.currentUser.uid));
 
     const unsubscribeChats = onSnapshot(chatsQuery, (chatsSnapshot) => {
-      console.log("Chats updated:", chatsSnapshot.docs.map(doc => doc.id));
 
       const unsubscribers = [];
 
@@ -37,10 +35,8 @@ export const GlobalStateProvider = ({ children }) => {
         const messagesRef = collection(db, "chats", chatID, "messages");
 
         const unsubscribeMessages = onSnapshot(messagesRef, (messagesSnapshot) => {
-          console.log(`Messages updated for chat: ${chatID}`);
 
           if (currentChatUID && currentChatUID === chatID) {
-            console.log(`Clearing unseen messages for chat: ${chatID}`);
             clearUnseen(chatID);
           }
         });
@@ -105,7 +101,6 @@ export const GlobalStateProvider = ({ children }) => {
   const changeCurrentChatUID = async (UID) => {
     setcurrentChatUID(UID);
     if (UID) {
-      console.log(`Changing current chat to ${UID} and clearing unseen messages.`);
       clearUnseen(UID);
     }
   };
@@ -113,14 +108,11 @@ export const GlobalStateProvider = ({ children }) => {
   const clearUnseen = async (UID) => {
     if (!UID || !auth.currentUser) return;
 
-    console.log(`Running clearUnseen for chat: ${UID}`);
-
     const messagesRef = collection(db, "chats", UID, "messages");
     const messagesSnapshot = await getDocs(messagesRef);
 
     messagesSnapshot.forEach(async (messageDoc) => {
       const messageData = messageDoc.data();
-      console.log(`Checking message ${messageDoc.id}: sender=${messageData.sender}, seen=${messageData.seen}`);
 
       if (messageData.sender !== auth.currentUser.uid && !messageData.seen) {
         const messageRef = doc(db, "chats", UID, "messages", messageDoc.id);

@@ -57,7 +57,7 @@ const ChatList = () => {
             chatID: chatDoc.id,
             username: userData.username,
             profileURL: userData.profileURL,
-            lastMessage: chatData.lastMessage || "",
+            [`lastmsg_${auth.currentUser.uid}`]: chatData[`lastmsg_${auth.currentUser.uid}`],
             lastMessageTimestamp: chatData.lastMessageTimestamp || null,
           });
 
@@ -115,7 +115,7 @@ const ChatList = () => {
           <img src={chat.profileURL || "./profile.png"} alt="Profile" />
           <div className='texts'>
             <div className='name'>{chat.username}</div>
-            <div className='lastmsg'>{chat.lastMessage}</div>
+            <div className='lastmsg'>{chat[`lastmsg_${auth.currentUser.uid}`]}</div>
           </div>
         </div>
       ))}

@@ -37,7 +37,8 @@ const Friends = () => {
     await setDoc(doc(db, "chats", uid),{
       id:uid,
       users:uid.split("_"),
-      lastMessage:"",
+      [`lastmsg_${uid1}`] : "",
+      [`lastmsg_${uid2}`] : "",
       lastMessageTimestamp:serverTimestamp()
     });
     await deleteDoc(doc(db, "friendRequests", uid));
@@ -150,7 +151,7 @@ const Friends = () => {
       {activeTab === 'requests' && (
         <div className="friend-requests">
           {requests.map((req) => (
-            <UserItem key={req.id} username={req.senderName} profilePic={req.profilePic || "./profile.png"} isRequest uid={req.id} acceptRequest={acceptRequest} />
+            <UserItem key={req.id} username={req.senderName} profilePic={req.profileURL || "./profile.png"} isRequest uid={req.id} acceptRequest={acceptRequest} />
           ))}
         </div>
       )}

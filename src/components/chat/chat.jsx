@@ -7,7 +7,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoMdDownload } from "react-icons/io";
 import { useGlobalState } from '../../backend/globalStates';
 import { auth, db } from '../../backend/firebase';
-import { collection, doc, getDoc, addDoc, serverTimestamp, query, onSnapshot, orderBy, updateDoc, connectFirestoreEmulator, arrayUnion, deleteDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, addDoc, serverTimestamp, query, onSnapshot, orderBy, updateDoc, connectFirestoreEmulator, arrayUnion, deleteDoc, getDocs } from 'firebase/firestore';
 import { OrbitProgress } from 'react-loading-indicators';
 
 const Chat = () => {
@@ -98,13 +98,64 @@ const Chat = () => {
     await updateDoc(doc(db,"chats",currentChatUID,"messages",id),{
       deletedFrom : arrayUnion(auth.currentUser.uid)
     })
+    try{
     const data = await getDoc(db,"chats",currentChatUID,"messages",id)
     if(data.deletedFrom.length() === 2){
       await deleteDoc(doc(db,"chats",currentChatUID,"messages",id))
     }
+  }catch(err){
+    console.log("err",err)
+  }
+    updateLastMsg()
   }
   const DeleteFromEveryone = async(id)=>{
     await deleteDoc(doc(db,"chats",currentChatUID,"messages",id))
+    updateLastMsg()
+  }
+  const updateLastMsg = async()=>{
+    let updated = 0
+    const snapshot = await getDocs(collection(db, "chats", currentChatUID, "messages"));
+    const messages = snapshot.docs
+     .map(doc => doc.data())
+     .sort((a, b) => (b.timestamp?.toMillis() || 0) - (a.timestamp?.toMillis() || 0));
+
+    const [uid1, uid2] = currentChatUID.split("_");
+    for(const msg of messages){
+      if(updated === 2)break
+      if(!(msg.deletedFrom.includes(uid1))){
+        let lastmsg
+        if(msg.imageURL){
+          lastmsg = "📷 Image"
+        }
+        else if(msg.fileURL){
+          lastmsg = "📄 File"; 
+        }
+        else{
+          lastmsg = msg.text
+        }
+        await updateDoc(doc(db,"chats",currentChatUID),{
+          [`lastmsg_${uid1}`]: lastmsg
+        })
+        updated ++
+      }
+      if(!(msg.deletedFrom.includes(uid2))){
+        let lastmsg
+        if(msg.imageURL){
+          lastmsg = "📷 Image"
+        }
+        else if(msg.fileURL){
+          lastmsg = "📄 File"; 
+        }
+        else{
+          lastmsg = msg.text
+        }
+        await updateDoc(doc(db,"chats",currentChatUID),{
+          [`lastmsg_${uid2}`]: lastmsg
+        })
+        updated ++
+      }
+      console.log("updating")
+    }
   }
   const sendMessage = async () => {
   if (!text.trim() && selectedImages.length === 0 && selectedFiles.length === 0) return;
@@ -112,6 +163,7 @@ const Chat = () => {
 
   const messagesRef = collection(db, "chats", currentChatUID, "messages");
   let lastMsg = "";
+  const [uid1, uid2] = currentChatUID.split("_")
 
   const today = new Date().toLocaleString("en-US", {
     day: "numeric",
@@ -220,7 +272,8 @@ const Chat = () => {
   }
 
   await updateDoc(doc(db, "chats", currentChatUID), {
-    lastMessage: lastMsg,
+    [`lastmsg_${uid1}`]:lastMsg,
+    [`lastmsg_${uid2}`]:lastMsg,
     lastMessageTimestamp: serverTimestamp(),
   });
 
