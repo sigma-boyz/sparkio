@@ -9,6 +9,7 @@ import { useGlobalState } from '../../backend/globalStates';
 import { auth, db } from '../../backend/firebase';
 import { collection, doc, getDoc, addDoc, serverTimestamp, query, onSnapshot, orderBy, updateDoc, connectFirestoreEmulator, arrayUnion, deleteDoc, getDocs } from 'firebase/firestore';
 import { OrbitProgress } from 'react-loading-indicators';
+import { animateScroll as scroll } from 'react-scroll'
 
 const Chat = () => {
   const { currentChatUID, messages, changeCurrentChatUID , clearUnseen} = useGlobalState();
@@ -27,8 +28,13 @@ const Chat = () => {
   const endRef = useRef(null)
       
   useEffect(()=>{
-    endRef.current?.scrollIntoView()
-  },[])
+    scroll.scrollToBottom({
+      containerId: "center",
+      offset:0,
+      duration:100,
+      smooth: "easeInOutQuad"
+    })
+  },[msgs])
   const handleMenuClick = (messageId) => {
     setOpenMenu(openMenu === messageId ? null : messageId);
  };

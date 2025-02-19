@@ -18,7 +18,7 @@ const Friends = () => {
     await setDoc(doc(db, "friendRequests", uid), {
       sender: auth.currentUser.uid,
       receiver: userData.id,
-      profileURL: userData.profileURL,
+      profileURL: userData.profileURL || "./profile.png",
       id: uid
     });
 
