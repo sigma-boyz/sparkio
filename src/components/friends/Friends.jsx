@@ -120,28 +120,22 @@ const Friends = () => {
   }, []);
 
   return (
-    <div className="w-[800px] bg-gray-900 rounded-lg shadow-lg p-6">
-      <nav className="flex gap-4 mb-6 border-b border-gray-700 pb-4">
+    <div className="friends-container">
+      <nav className="tabs">
         <button
-          className={`px-4 py-2 rounded-lg hover:bg-gray-800 text-gray-300 transition-all transform hover:scale-105 active:scale-95 ${
-            activeTab === 'friends' ? 'bg-gray-700' : ''
-          }`}
+          className={activeTab === 'friends' ? 'active' : ''}
           onClick={() => setActiveTab('friends')}
         >
           Friends List
         </button>
         <button
-          className={`px-4 py-2 rounded-lg hover:bg-gray-800 text-gray-300 transition-all transform hover:scale-105 active:scale-95 ${
-            activeTab === 'add' ? 'bg-gray-700' : ''
-          }`}
+          className={activeTab === 'add' ? 'active' : ''}
           onClick={() => setActiveTab('add')}
         >
           Add Friend
         </button>
         <button
-          className={`px-4 py-2 rounded-lg hover:bg-gray-800 text-gray-300 transition-all transform hover:scale-105 active:scale-95 ${
-            activeTab === 'requests' ? 'bg-gray-700' : ''
-          }`}
+          className={activeTab === 'requests' ? 'active' : ''}
           onClick={() => setActiveTab('requests')}
         >
           Requests
@@ -164,19 +158,13 @@ const Friends = () => {
       {/* Add Friends Tab */}
       {activeTab === 'add' && (
         <div className="space-y-4">
-          <div className="flex items-center gap-4 mb-6">
+          <div className="search-bar">
             <input
               type="text"
               placeholder="Search users..."
-              className="flex-1 px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 text-gray-300 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
               onChange={(e) => setText(e.target.value)}
             />
-            <button
-              className="px-6 py-2 bg-blue-600 text-gray-200 rounded-lg hover:bg-blue-700 transition-all transform hover:scale-105 active:scale-95"
-              onClick={searchUser}
-            >
-              Search
-            </button>
+            <button onClick={searchUser}>Search</button>
           </div>
           {userData && (
             <UserItem
@@ -210,35 +198,23 @@ const Friends = () => {
 
 const UserItem = ({ username, profilePic, buttonText, isRequest, addFriend, uid, acceptRequest }) => {
   return (
-    <div className="bg-gray-800 p-4 rounded-lg shadow hover:shadow-md transition-all transform hover:-translate-y-1">
+    <div className="user-item">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <img
-            src={profilePic}
-            alt="Profile"
-            className="w-12 h-12 rounded-full object-cover ring-2 ring-blue-500"
-          />
-          <h3 className="font-semibold text-gray-300 ">{username}</h3>
+          <img src={profilePic} alt="Profile" />
+          <h3>{username}</h3>
         </div>
         {buttonText && (
-          <button
-            className="px-4 py-2 bg-blue-600 text-gray-200 rounded-lg hover:bg-blue-700 transition-all transform hover:scale-105 active:scale-95"
-            onClick={addFriend}
-          >
+          <button className="add-friend" onClick={addFriend}>
             {buttonText}
           </button>
         )}
         {isRequest && (
           <div className="flex gap-2">
-            <button
-              className="px-4 py-2 bg-green-600 text-gray-200 rounded-lg hover:bg-green-700 transition-all transform hover:scale-105 active:scale-95"
-              onClick={() => acceptRequest(uid)}
-            >
+            <button className="accept" onClick={() => acceptRequest(uid)}>
               Accept
             </button>
-            <button
-              className="px-4 py-2 bg-red-600 text-gray-200 rounded-lg hover:bg-red-700 transition-all transform hover:scale-105 active:scale-95"
-            >
+            <button className="reject">
               Reject
             </button>
           </div>
