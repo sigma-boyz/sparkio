@@ -218,7 +218,7 @@ const UserItem = ({ username, profilePic, buttonText, isRequest, addFriend, uid,
             alt="Profile"
             className="w-12 h-12 rounded-full object-cover ring-2 ring-blue-500"
           />
-          <h3 className="font-semibold text-gray-300">{username}</h3>
+          <h3 className="font-semibold text-gray-300 ">{username}</h3>
         </div>
         {buttonText && (
           <button
