@@ -1,60 +1,199 @@
 .friends-container {
-  background: #0d1117;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
+    width: calc(100% - 60px);
+    height: 100vh;
+    background: #121212;
+    margin-left: 60px;
+    display: flex;
+    margin: 100px;
+    margin-top: 130px;
+    flex-direction: column;
+    color: white;
 }
 
+/* Tabs Navigation */
 .tabs {
-  display: flex;
-  justify-content: space-around;
-  padding: 15px;
-  border-bottom: 2px solid #007bff;
+    display: flex;
+    justify-content: space-around;
+    background: #1e1e1e;
+    padding: 15px;
+    border-radius: 20px;
+    border-bottom: 1.4px solid #007bff;
+    margin-bottom: 20px;
 }
 
 .tabs button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px;
+    transition: all 0.3s ease;
 }
 
 .tabs button.active {
-  border-bottom: 3px solid #007bff;
+    border-bottom: 3px solid #007bff;
+    font-weight: bold;
 }
 
+/* Content Areas */
+.friends-list, .add-friends, .friend-requests {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: #1e1e1e;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
+    background: #2c2c2c;
+    color: white;
+    font-size: 16px;
+}
+
+.search-bar button {
+    padding: 0px 20px;
+    background: #007bff;
+    border: none;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.search-bar button:hover {
+    background: #0056b3;
+}
+
+/* User Items */
 .user-item {
-  display: flex;
-  align-items: center;
-  background: #161b22;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    background: #2c2c2c;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .user-item img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 2px solid #007bff;
+}
+
+.user-item span {
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .user-item button {
-  margin-left: auto;
+    margin-left: auto;
+    background: #007bff;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
 }
 
-.add-friend {
-  background: #007bff;
-  padding: 8px 12px;
-  border-radius: 5px;
-  color: white;
+.user-item button:hover {
+    background: #0056b3;
 }
 
-.accept {
-  background: #28a745;
+/* Request Buttons */
+.request-buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
 }
 
-.reject {
-  background: #dc3545;
+.request-buttons .accept {
+    background: #28a745;
+    padding: 8px 16px;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.request-buttons .accept:hover {
+    background: #218838;
+}
+
+.request-buttons .reject {
+    background: #dc3545;
+    padding: 8px 16px;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.request-buttons .reject:hover {
+    background: #c82333;
+}
+
+@media (max-width: 500px) {
+    .friends-container {
+        margin: 0;
+        padding: 10px;
+    }
+
+    .tabs button {
+        font-size: 16px;
+    }
+
+    .search-bar input {
+        padding: 10px;
+    }
+
+    .search-bar button {
+        padding: 0px 15px;
+    }
+
+    .user-item {
+        padding: 10px;
+    }
+
+    .user-item img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .user-item span {
+        font-size: 14px;
+    }
+
+    .user-item button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .request-buttons .accept,
+    .request-buttons .reject {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
 }
